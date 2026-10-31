@@ -1,0 +1,16 @@
+{
+  "name": "NEON 404 — Invasão dos Circuitos",
+  "short_name": "NEON 404",
+  "description": "FPS retrô de ficção científica com robôs. Cinco setores e modo offline.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050918",
+  "theme_color": "#070b1c",
+  "icons": [
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
