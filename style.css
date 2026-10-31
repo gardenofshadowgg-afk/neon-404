@@ -1,0 +1,487 @@
+
+:root {
+  --bg: #050918;
+  --cyan: #43f6ed;
+  --pink: #ff5ca8;
+  --yellow: #ffe16a;
+  --fg: #f2f7ff;
+  --muted: #b6c5df;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050816;
+  color: var(--fg);
+  font-family: Arial, sans-serif;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#gameShell {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: radial-gradient(
+    circle,
+    #122446,
+    #030712
+  );
+  user-select: none;
+}
+
+#screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+#damageFlash {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  background: radial-gradient(
+    transparent 40%,
+    rgba(255,34,92,.8)
+  );
+  transition: opacity .12s;
+}
+
+/* PAINEL SUPERIOR */
+
+#hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 13px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    #020617cf,
+    transparent
+  );
+  text-shadow: 0 2px 5px #000;
+}
+
+.hudGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hudGroup small {
+  color: #d0e5f0;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.hudGroup b {
+  font-size: 21px;
+  color: var(--cyan);
+}
+
+.hudGroup.center {
+  text-align: center;
+}
+
+.hudGroup.right {
+  text-align: right;
+}
+
+.hudGroup.right b {
+  color: white;
+}
+
+/* BOTOES SUPERIORES */
+
+#topActions {
+  position: absolute;
+  z-index: 8;
+  top: 71px;
+  right: 12px;
+  display: flex;
+  gap: 7px;
+}
+
+#topActions button {
+  height: 37px;
+  min-width: 37px;
+  border: 1px solid #86d9ec78;
+  background: #04152ecb;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+/* RADAR */
+
+#radarWrap {
+  position: absolute;
+  z-index: 5;
+  right: 12px;
+  top: 115px;
+  width: 110px;
+  height: 110px;
+  background: #030a1ee0;
+  border: 1px solid var(--cyan);
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+#radar {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#sectorToast {
+  position: absolute;
+  z-index: 6;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 13px 18px;
+  max-width: 80%;
+  background: #061329e8;
+  border: 1px solid var(--cyan);
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+/* CONTROLES DO CELULAR */
+
+#controls {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+#moveZone {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 44%;
+  height: 57%;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+#stickBase {
+  position: absolute;
+  width: 116px;
+  height: 116px;
+  left: 30px;
+  bottom: 20px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  background: #103b54a1;
+  display: grid;
+  place-items: center;
+}
+
+#stickKnob {
+  width: 49%;
+  height: 49%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #a5fffb,
+    #36c7d1
+  );
+  box-shadow: 0 0 15px #24fff381;
+}
+
+#lookZone {
+  position: absolute;
+  left: 44%;
+  right: 0;
+  top: 20%;
+  bottom: 0;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+#shootButton,
+#switchButton {
+  position: absolute;
+  pointer-events: auto;
+  touch-action: none;
+  border: 2px solid #ffffff66;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+#shootButton {
+  right: 20px;
+  bottom: 22px;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(
+    circle,
+    #ffb7df,
+    #f92a78
+  );
+  color: #25051a;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#shootButton span {
+  font-size: 24px;
+}
+
+#shootButton.firing {
+  transform: scale(.94);
+  filter: brightness(1.25);
+}
+
+#switchButton {
+  right: 117px;
+  bottom: 30px;
+  width: 62px;
+  height: 62px;
+  background: #174065e0;
+  font-size: 24px;
+}
+
+#switchButton span {
+  display: block;
+  font-size: 9px;
+}
+
+/* MENU PRINCIPAL */
+
+#overlay,
+#instructions {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020614d6;
+  padding: 10px;
+  overflow-y: auto;
+  touch-action: pan-y;
+}
+
+#instructions {
+  z-index: 20;
+  background: #030713e9;
+}
+
+.panel {
+  width: min(530px, 94vw);
+  max-height: 95dvh;
+  overflow-y: auto;
+  padding: 22px;
+  border: 1px solid #6af6ef70;
+  border-radius: 18px;
+  background: linear-gradient(
+    160deg,
+    #0b1d39,
+    #081022
+  );
+  box-shadow: 0 0 40px #28d5ee28;
+  text-align: center;
+  touch-action: pan-y;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--cyan);
+  font-weight: bold;
+}
+
+h1 {
+  margin: 5px 0;
+  font-size: clamp(46px, 10vw, 88px);
+  color: white;
+  text-shadow: 0 0 25px var(--cyan);
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--pink);
+}
+
+.subtitle {
+  font-weight: bold;
+  letter-spacing: .2em;
+  color: var(--yellow);
+}
+
+.pitch {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #c9d9eb;
+  margin: 16px auto;
+}
+
+#statusPill {
+  display: inline-block;
+  padding: 7px 13px;
+  border: 1px solid var(--cyan);
+  border-radius: 22px;
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#menuButtons {
+  display: grid;
+  gap: 10px;
+  max-width: 330px;
+  margin: 20px auto;
+}
+
+.panel button {
+  padding: 13px 15px;
+  border: 1px solid var(--cyan);
+  background: #152b48;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.panel button.primary {
+  background: linear-gradient(
+    120deg,
+    #3af7ec,
+    #2dbbea
+  );
+  border: none;
+  color: #062233;
+}
+
+.smallNote {
+  font-size: 11px;
+  color: #8da8c2;
+}
+
+.helpPanel {
+  text-align: left;
+}
+
+.helpPanel p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.helpPanel .primary {
+  display: block;
+  margin: 16px auto;
+}
+
+/* CELULAR */
+
+#rotateHint {
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #aec1d8;
+  z-index: 10;
+  display: none;
+}
+
+@media (orientation: portrait) {
+  #rotateHint {
+    display: block;
+  }
+
+  #hud {
+    padding: 10px 8px;
+  }
+
+  .hudGroup b {
+    font-size: 14px;
+  }
+
+  .hudGroup small {
+    font-size: 8px;
+  }
+
+  #stickBase {
+    left: 16px;
+    bottom: 44px;
+  }
+
+  #shootButton {
+    right: 14px;
+    bottom: 48px;
+  }
+
+  #switchButton {
+    right: 108px;
+    bottom: 53px;
+  }
+}
+
+@media (max-height: 400px) {
+  .panel {
+    padding: 12px 18px;
+  }
+
+  .panel h1 {
+    font-size: 43px;
+  }
+
+  #topActions {
+    top: 49px;
+  }
+
+  #radarWrap {
+    top: 93px;
+    width: 87px;
+    height: 87px;
+  }
+
+  #shootButton {
+    width: 78px;
+    height: 78px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #controls {
+    display: none !important;
+  }
+
+  #rotateHint {
+    display: none;
+  }
+}
