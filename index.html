@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#070b1c">
+  <meta name="description" content="NEON 404: jogo de ação retrô com robôs e 5 setores. Jogue offline.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>NEON 404 — Invasão dos Circuitos</title>
+</head>
+<body>
+  <main id="gameShell">
+    <canvas id="screen" aria-label="Visão em primeira pessoa do jogo"></canvas>
+    <div id="damageFlash" aria-hidden="true"></div>
+
+    <header id="hud" class="hidden">
+      <div class="hudGroup">
+        <small>SETOR</small>
+        <b id="sectorLabel">01 / 05</b>
+        <small id="enemyLabel">ROBÔS: 00</small>
+      </div>
+      <div class="hudGroup center">
+        <small>PONTUAÇÃO</small>
+        <b id="scoreLabel">000000</b>
+        <small id="objectiveLabel">ENCONTRE OS ROBÔS</small>
+      </div>
+      <div class="hudGroup right">
+        <small>VIDA</small>
+        <b id="healthLabel">✚ 100</b>
+        <small>
+          <span id="weaponLabel">BLASTER</span>
+          <span id="ammoLabel">∞</span> ·
+          <span id="crystalLabel">◈ 00</span>
+        </small>
+      </div>
+    </header>
+
+    <div id="sectorToast" class="hidden"></div>
+
+    <div id="radarWrap" class="hidden">
+      <canvas id="radar" width="142" height="142" aria-label="Mapa do setor"></canvas>
+    </div>
+
+    <div id="topActions" class="hidden">
+      <button id="radarButton" aria-label="Mostrar ou ocultar radar">◎</button>
+      <button id="muteButton" aria-label="Ativar ou desativar som">♫</button>
+      <button id="pauseButton" aria-label="Pausar jogo">Ⅱ</button>
+    </div>
+
+    <div id="controls" class="hidden" aria-label="Controles de toque">
+      <div id="moveZone" aria-label="Controle de movimento">
+        <div id="stickBase">
+          <div id="stickKnob"></div>
+        </div>
+      </div>
+      <div id="lookZone" aria-label="Deslize para olhar ao redor"></div>
+      <button id="shootButton" aria-label="Atirar">DISPARAR<span>✦</span></button>
+      <button id="switchButton" aria-label="Trocar arma">⇄<span>ARMA</span></button>
+    </div>
+
+    <section id="overlay" aria-live="polite">
+      <div class="panel" id="menuPanel">
+        <div class="eyebrow">◈ ARCADE / OFFLINE ◈</div>
+        <h1>NEON <em>404</em></h1>
+        <p class="subtitle">INVASÃO DOS CIRCUITOS</p>
+        <p class="pitch">
+          A cidade perdeu o controle dos seus robôs.
+          Explore cinco setores coloridos, recupere
+          cristais de energia e restaure a central!
+        </p>
+        <div id="statusPill">5 SETORES · 3 ARMAS · SEM TERROR</div>
+        <div id="menuButtons">
+          <button class="primary" id="startButton">▶ NOVA PARTIDA</button>
+          <button id="continueButton" class="hidden">↪ CONTINUAR</button>
+          <button id="instructionsButton">? COMO JOGAR</button>
+        </div>
+        <p class="smallNote">
+          Funciona sem internet depois do primeiro carregamento completo.
+          Melhor na horizontal.
+        </p>
+      </div>
+    </section>
+
+    <div id="instructions" class="hidden" role="dialog" aria-modal="true" aria-label="Como jogar">
+      <div class="panel helpPanel">
+        <div class="eyebrow">MANUAL DO PILOTO</div>
+        <h2>COMO JOGAR</h2>
+        <p><strong>Objetivo:</strong> desative todos os robôs de cada setor e depois encontre o portal luminoso. Colete cristais para aumentar sua pontuação.</p>
+        <p><strong>Celular:</strong> use o círculo esquerdo para andar, deslize o dedo na metade direita para olhar, toque em DISPARAR para atirar e em ARMA para trocar.</p>
+        <p><strong>Computador:</strong> W A S D para andar, ← → para girar, mouse para mirar, clique ou ESPAÇO para atirar, teclas 1/2/3 para armas, M para o radar, ESC para pausar.</p>
+        <p><strong>Armas:</strong> blaster tem energia infinita, espalhador e plasma têm cargas limitadas. Colete caixas de energia para recarregar.</p>
+        <p>O progresso é salvo neste navegador ao concluir um setor. O jogo não utiliza contas, anúncios nem serviços externos.</p>
+        <button class="primary" id="closeInstructions">ENTENDI</button>
+      </div>
+    </div>
+
+    <div id="rotateHint">↻ Gire o celular para jogar com uma visão maior</div>
+  </main>
+
+  <script src="./game.js" defer></script>
+</body>
+</html>
